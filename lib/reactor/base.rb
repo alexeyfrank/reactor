@@ -8,15 +8,21 @@ module Reactor
     end
 
     def run
-      while !@stopped
-        rs, ws = IO.select(@streams, @streams)
-        rs.each do |s|
-          s.handle_read
-        end
+      tick while !@stopped
 
-        ws.each do |s|
-          # s.handle_write
-        end
+      if @stopped
+        @streams.map &:close
+      end
+    end
+
+    def tick
+      rs, ws = IO.select(@streams, @streams)
+      rs.each do |s|
+        s.handle_read
+      end
+
+      ws.each do |s|
+        s.handle_write
       end
     end
 

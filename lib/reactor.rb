@@ -10,5 +10,4 @@ module Reactor
     yield reactor
     reactor.run
   end
-
 end
