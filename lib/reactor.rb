@@ -2,8 +2,11 @@ require "reactor/version"
 
 module Reactor
   autoload :Base, 'reactor/base'
-  autoload :Stream, 'reactor/stream'
-  autoload :StreamServer, 'reactor/stream_server'
+  module Streams
+    autoload :Base, 'reactor/streams/base'
+    autoload :Stream, 'reactor/streams/stream'
+    autoload :Server, 'reactor/streams/server'
+  end
   # Your code goes here...
   def self.run
     reactor = Base.new

@@ -31,7 +31,7 @@ module Reactor
     end
 
     def listen(host, port)
-      server = StreamServer.new(TCPServer.new(host, port))
+      server = Streams::Server.new(TCPServer.new(host, port))
       self << server
       server.on :accept do |stream|
         self << stream
@@ -41,7 +41,7 @@ module Reactor
 
     def connect(host, port)
       socket = TCPSocket.new(host, port)
-      stream = Stream.new socket
+      stream = Streams::Stream.new socket
       self << stream
       stream
     end
